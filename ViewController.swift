@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var companyName: UITextField!
     
-    var stuArray = [Student]()
+//    var stuArray = [Student]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,10 +26,11 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        var obj = segue.destination as! TableviewVC
-        obj.studentArray = stuArray
-    }
+//    commented for appdelegate operation
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        var obj = segue.destination as! TableviewVC
+//        obj.studentArray = stuArray
+//    }
     @IBAction func NextAction(_ sender: Any) {
         performSegue(withIdentifier: "NextTV", sender: self)
     }
@@ -37,9 +38,19 @@ class ViewController: UIViewController {
     @IBAction func addDataAction(_ sender: Any)
     {
         var stuObj = Student()
+//        normal way toadd data in array
         stuObj.stuName = stuName.text!
         stuObj.companyName = companyName.text!
-        stuArray.append(stuObj)
+//        stuArray.append(stuObj)
+        
+//        using appdelegete array
+        var appDel = UIApplication.shared.delegate as! AppDelegate
+        appDel.stuArrayGlobal.append(stuObj)
+    }
+    
+    
+    @IBAction func gotocollectionAction(_ sender: Any) {
+        performSegue(withIdentifier: "gotocollection", sender: self)
     }
 }
 
