@@ -1,20 +1,16 @@
 //
 //  ViewController.swift
-//  A29_Monday_26
+//  A29_Monday_03_10
 //
-//  Created by exam on 9/26/22.
+//  Created by exam on 10/3/22.
 //  Copyright © 2022 mansi. All rights reserved.
 //
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController,UITableViewDataSource {
 
-    @IBOutlet weak var stuName: UITextField!
-    
-    @IBOutlet weak var companyName: UITextField!
-    
-//    var stuArray = [Student]()
+ 
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,31 +22,22 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-//    commented for appdelegate operation
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        var obj = segue.destination as! TableviewVC
-//        obj.studentArray = stuArray
-//    }
-    @IBAction func NextAction(_ sender: Any) {
-        performSegue(withIdentifier: "NextTV", sender: self)
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as! myCell
+        cell.stuName.text="Mansi"
+        cell.stuRollNo.text="29"
+        
+        return cell
     }
 
-    @IBAction func addDataAction(_ sender: Any)
-    {
-        var stuObj = Student()
-//        normal way toadd data in array
-        stuObj.stuName = stuName.text!
-        stuObj.companyName = companyName.text!
-//        stuArray.append(stuObj)
+    
+    @IBAction func goToNext(_ sender: Any) {
         
-//        using appdelegete array
-        var appDel = UIApplication.shared.delegate as! AppDelegate
-        appDel.stuArrayGlobal.append(stuObj)
-    }
-    
-    
-    @IBAction func gotocollectionAction(_ sender: Any) {
-        performSegue(withIdentifier: "gotocollection", sender: self)
+        performSegue(withIdentifier: "next", sender: self)
     }
 }
 
